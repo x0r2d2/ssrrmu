@@ -1,5 +1,5 @@
 # ssrrmu
-ShadowsocksRR multi-user install script
+ShadowsocksRR multi-user (mudbjson) install script
 
 Original version - https://doub.io/ss-jc60/ (Chinese)
 
