@@ -7,6 +7,7 @@ export PATH
 #	Description: Install the ShadowsocksR mudbjson server
 #	Version: 1.0.20
 #	Author: Toyo
+#       Translator: hybtoy 
 #	Blog: https://doub.io/ss-jc60/
 #=================================================
 
@@ -20,7 +21,7 @@ config_user_api_file="${ssr_folder}/userapiconfig.py"
 config_user_mudb_file="${ssr_folder}/mudb.json"
 ssr_log_file="${ssr_folder}/ssserver.log"
 Libsodiumr_file="/usr/local/lib/libsodium.so"
-Libsodiumr_ver_backup="1.0.15"
+Libsodiumr_ver_backup="1.0.16"
 Server_Speeder_file="/serverspeeder/bin/serverSpeeder.sh"
 LotServer_file="/appex/bin/serverSpeeder.sh"
 BBR_file="${file}/bbr.sh"
@@ -60,7 +61,7 @@ check_crontab(){
 	[[ ! -e "/usr/bin/crontab" ]] && echo -e "${Error} 缺少依赖 Crontab ，请尝试手动安装 CentOS: yum install crond -y , Debian/Ubuntu: apt-get install cron -y !" && exit 1
 }
 SSR_installation_status(){
-	[[ ! -e ${ssr_folder} ]] && echo -e "${Error} 没有发现 ShadowsocksR 文件夹，请检查 !" && exit 1
+	[[ ! -e ${ssr_folder} ]] && echo -e "${Error} ShadowsocksR folder not found，please check!" && exit 1
 }
 Server_Speeder_installation_status(){
 	[[ ! -e ${Server_Speeder_file} ]] && echo -e "${Error} 没有安装 锐速(Server Speeder)，请检查 !" && exit 1
@@ -355,7 +356,7 @@ View_User_info(){
 }
 # 设置 配置信息
 Set_config_user(){
-	echo "Please enter the user name you want to set (do not repeat, for distinction, does not support Chinese, will be reported incorrect!)"
+	echo "Please enter the username you want to set (do not repeat, does not support Chinese, will be reported incorrect!)"
 	stty erase '^H' && read -p "(Default: doubi):" ssr_user
 	[[ -z "${ssr_user}" ]] && ssr_user="doubi"
 	echo && echo ${Separator_1} && echo -e "	username : ${Green_font_prefix}${ssr_user}${Font_color_suffix}" && echo ${Separator_1} && echo
@@ -468,7 +469,7 @@ Set_config_protocol(){
  ${Red_font_prefix}9.${Font_color_suffix} auth_chain_e
  ${Red_font_prefix}10.${Font_color_suffix} auth_chain_f
  ${Tip} If you select auth_chain_* series protocol, it is recommended to set encryption method to none" && echo
-	stty erase '^H' && read -p "(Default: 2. auth_sha1_v4):" ssr_protocol
+	stty erase '^H' && read -p "(Default: 5. auth_chain_a):" ssr_protocol
 	[[ -z "${ssr_protocol}" ]] && ssr_protocol="2"
 	if [[ ${ssr_protocol} == "1" ]]; then
 		ssr_protocol="origin"
@@ -491,12 +492,12 @@ Set_config_protocol(){
 	elif [[ ${ssr_protocol} == "10" ]]; then
 		ssr_protocol="auth_chain_f"
 	else
-		ssr_protocol="auth_sha1_v4"
+		ssr_protocol="auth_chain_a"
 	fi
 	echo && echo ${Separator_1} && echo -e "	Protocol : ${Green_font_prefix}${ssr_protocol}${Font_color_suffix}" && echo ${Separator_1} && echo
 	if [[ ${ssr_protocol} != "origin" ]]; then
 		if [[ ${ssr_protocol} == "auth_sha1_v4" ]]; then
-			stty erase '^H' && read -p "Whether to set protocol plug-in to compatible mode(_compatible)？[Y/n]" ssr_protocol_yn
+			stty erase '^H' && read -p "Set protocol plug-in to compatible mode(_compatible)?[Y/n]" ssr_protocol_yn
 			[[ -z "${ssr_protocol_yn}" ]] && ssr_protocol_yn="y"
 			[[ $ssr_protocol_yn == [Yy] ]] && ssr_protocol=${ssr_protocol}"_compatible"
 			echo
@@ -528,7 +529,7 @@ Set_config_obfs(){
 	fi
 	echo && echo ${Separator_1} && echo -e "	obfs : ${Green_font_prefix}${ssr_obfs}${Font_color_suffix}" && echo ${Separator_1} && echo
 	if [[ ${ssr_obfs} != "plain" ]]; then
-			stty erase '^H' && read -p "Whether to set protocol plug-in to compatible mode(_compatible)？[Y/n]" ssr_obfs_yn
+			stty erase '^H' && read -p "Set protocol plug-in to compatible mode(_compatible)?[Y/n]" ssr_obfs_yn
 			[[ -z "${ssr_obfs_yn}" ]] && ssr_obfs_yn="y"
 			[[ $ssr_obfs_yn == [Yy] ]] && ssr_obfs=${ssr_obfs}"_compatible"
 			echo
@@ -976,21 +977,21 @@ Uninstall_SSR(){
 	fi
 }
 Check_Libsodium_ver(){
-	echo -e "${Info} 开始获取 libsodium 最新版本..."
+	echo -e "${Info} Downloading latest version of libsodium"
 	Libsodiumr_ver=$(wget -qO- "https://github.com/jedisct1/libsodium/tags"|grep "/jedisct1/libsodium/releases/tag/"|head -1|sed -r 's/.*tag\/(.+)\">.*/\1/')
 	[[ -z ${Libsodiumr_ver} ]] && Libsodiumr_ver=${Libsodiumr_ver_backup}
-	echo -e "${Info} libsodium 最新版本为 ${Green_font_prefix}${Libsodiumr_ver}${Font_color_suffix} !"
+	echo -e "${Info} libsodium latest version is ${Green_font_prefix}${Libsodiumr_ver}${Font_color_suffix} !"
 }
 Install_Libsodium(){
 	if [[ -e ${Libsodiumr_file} ]]; then
-		echo -e "${Error} libsodium 已安装 , 是否覆盖安装(更新)？[y/N]"
+		echo -e "${Error} libsodium already installed, do you want to update?[y/N]"
 		stty erase '^H' && read -p "(Default: n):" yn
 		[[ -z ${yn} ]] && yn="n"
 		if [[ ${yn} == [Nn] ]]; then
-			echo "已取消..." && exit 1
+			echo "Cancelled..." && exit 1
 		fi
 	else
-		echo -e "${Info} libsodium 未安装，开始安装..."
+		echo -e "${Info} libsodium not installed，installation started..."
 	fi
 	Check_Libsodium_ver
 	if [[ ${release} == "centos" ]]; then
