@@ -468,6 +468,8 @@ Set_config_protocol(){
  ${Red_font_prefix}8.${Font_color_suffix} auth_chain_d
  ${Red_font_prefix}9.${Font_color_suffix} auth_chain_e
  ${Red_font_prefix}10.${Font_color_suffix} auth_chain_f
+ ${Red_font_prefix}11.${Font_color_suffix} auth_akarin_rand
+ ${Red_font_prefix}12.${Font_color_suffix} auth_akarin_spec_a
  ${Tip} If you select auth_chain_* series protocol, it is recommended to set encryption method to none" && echo
 	stty erase '^H' && read -p "(Default: 5. auth_chain_a):" ssr_protocol
 	[[ -z "${ssr_protocol}" ]] && ssr_protocol="2"
@@ -491,6 +493,10 @@ Set_config_protocol(){
 		ssr_protocol="auth_chain_e"
 	elif [[ ${ssr_protocol} == "10" ]]; then
 		ssr_protocol="auth_chain_f"
+	elif [[ ${ssr_protocol} == "11" ]]; then
+		ssr_protocol="auth_akarin_rand"
+	elif [[ ${ssr_protocol} == "12" ]]; then
+		ssr_protocol="auth_akarin_spec_a"
 	else
 		ssr_protocol="auth_chain_a"
 	fi
@@ -1747,7 +1753,7 @@ crontab_monitor_ssr_cron_stop(){
 Update_Shell(){
 	# echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
 	# sh_new_ver=$(wget --no-check-certificate -qO- "https://softs.fun/Bash/ssrmu.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="softs"
-	# [[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssrmu.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	# [[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/hybtoy/ssrrmu/master/ssrrmu.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	# [[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && exit 0
 	# if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		# echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
@@ -1756,9 +1762,7 @@ Update_Shell(){
 		# if [[ ${yn} == [Yy] ]]; then
 			# cd "${file}"
 			# if [[ $sh_new_type == "softs" ]]; then
-				# wget -N --no-check-certificate https://softs.fun/Bash/ssrmu.sh && chmod +x ssrmu.sh
-			# else
-				# wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssrmu.sh && chmod +x ssrmu.sh
+				# wget -N --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/master/ssrrmu.sh && chmod +x ssrrmu.sh
 			# fi
 			# echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
 		# else
