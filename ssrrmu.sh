@@ -5,13 +5,13 @@ export PATH
 #=================================================
 #	System Required: CentOS 6+/Debian 6+/Ubuntu 14.04+
 #	Description: Install the ShadowsocksR mudbjson server
-#	Version: 1.0.20
+#	Version: 1.0.25
 #	Author: Toyo
 #       Translator: hybtoy 
 #	Blog: https://doub.io/ss-jc60/
 #=================================================
 
-sh_ver="1.0.20"
+sh_ver="1.0.25"
 filepath=$(cd "$(dirname "$0")"; pwd)
 file=$(echo -e "${filepath}"|awk -F "$0" '{print $1}')
 ssr_folder="/usr/local/shadowsocksr"
