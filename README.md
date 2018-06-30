@@ -10,4 +10,4 @@ sudo wget https://raw.githubusercontent.com/hybtoy/ssrrmu/master/ssrrmu.sh && ch
 ```
 ShadowsocksR with latest protocols can be downloaded here - https://github.com/leitbogioro/ShadowsocksRR-Install/files/2127044/ShadowsocksR-win-4.9.0.zip-dev.zip
 
-Please note that "dev" branch is not stable, do not use in production.
+Please note that "dev" branch is not stable, do not use it in production environment. 
