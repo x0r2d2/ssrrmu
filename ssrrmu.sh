@@ -468,8 +468,6 @@ Set_config_protocol(){
  ${Red_font_prefix}8.${Font_color_suffix} auth_chain_d
  ${Red_font_prefix}9.${Font_color_suffix} auth_chain_e
  ${Red_font_prefix}10.${Font_color_suffix} auth_chain_f
- ${Red_font_prefix}11.${Font_color_suffix} auth_akarin_rand
- ${Red_font_prefix}12.${Font_color_suffix} auth_akarin_spec_a
  ${Tip} If you select auth_chain_* series protocol, it is recommended to set encryption method to none" && echo
 	stty erase '^H' && read -p "(Default: 5. auth_chain_a):" ssr_protocol
 	[[ -z "${ssr_protocol}" ]] && ssr_protocol="2"
@@ -493,10 +491,6 @@ Set_config_protocol(){
 		ssr_protocol="auth_chain_e"
 	elif [[ ${ssr_protocol} == "10" ]]; then
 		ssr_protocol="auth_chain_f"
-	elif [[ ${ssr_protocol} == "11" ]]; then
-		ssr_protocol="auth_akarin_rand"
-	elif [[ ${ssr_protocol} == "12" ]]; then
-		ssr_protocol="auth_akarin_spec_a"
 	else
 		ssr_protocol="auth_chain_a"
 	fi
