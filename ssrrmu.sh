@@ -834,7 +834,7 @@ Centos_yum(){
 }
 Debian_apt(){
 	apt-get update
-	apt-get install -y vim unzip cron git
+	apt-get install -y vim unzip cron git net-tools
 }
 # 下载 ShadowsocksR
 Download_SSR(){
