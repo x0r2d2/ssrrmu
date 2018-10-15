@@ -684,20 +684,20 @@ else
 	echo && echo -e "  MTProxy 一键管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
   ---- Toyo | doub.io/shell-jc7 ----
   
- ${Green_font_prefix} 0.${Font_color_suffix} 升级脚本
+ ${Green_font_prefix} 0.${Font_color_suffix} Update script
 ————————————
- ${Green_font_prefix} 1.${Font_color_suffix} 安装 MTProxy
- ${Green_font_prefix} 2.${Font_color_suffix} 更新 MTProxy
- ${Green_font_prefix} 3.${Font_color_suffix} 卸载 MTProxy
+ ${Green_font_prefix} 1.${Font_color_suffix} Install MTProxy
+ ${Green_font_prefix} 2.${Font_color_suffix} Update MTProxy
+ ${Green_font_prefix} 3.${Font_color_suffix} Uninstall MTProxy
 ————————————
- ${Green_font_prefix} 4.${Font_color_suffix} 启动 MTProxy
- ${Green_font_prefix} 5.${Font_color_suffix} 停止 MTProxy
- ${Green_font_prefix} 6.${Font_color_suffix} 重启 MTProxy
+ ${Green_font_prefix} 4.${Font_color_suffix} Start MTProxy
+ ${Green_font_prefix} 5.${Font_color_suffix} Stop MTProxy
+ ${Green_font_prefix} 6.${Font_color_suffix} Restart MTProxy
 ————————————
- ${Green_font_prefix} 7.${Font_color_suffix} 设置 账号配置
- ${Green_font_prefix} 8.${Font_color_suffix} 查看 账号信息
- ${Green_font_prefix} 9.${Font_color_suffix} 查看 日志信息
- ${Green_font_prefix}10.${Font_color_suffix} 查看 链接信息
+ ${Green_font_prefix} 7.${Font_color_suffix} MTProxy configuration
+ ${Green_font_prefix} 8.${Font_color_suffix} MTProxy information
+ ${Green_font_prefix} 9.${Font_color_suffix} MTProxy log file
+ ${Green_font_prefix}10.${Font_color_suffix} MTProxy link
 ————————————" && echo
 	if [[ -e ${mtproxy_file} ]]; then
 		check_pid
