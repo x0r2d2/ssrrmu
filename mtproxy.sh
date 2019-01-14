@@ -223,17 +223,17 @@ Set_nat(){
 Set_mtproxy(){
 	check_installed_status
 	echo && echo -e "你要做什么？
- ${Green_font_prefix}1.${Font_color_suffix}  修改 端口配置
- ${Green_font_prefix}2.${Font_color_suffix}  修改 密码配置
- ${Green_font_prefix}3.${Font_color_suffix}  修改 TAG 配置
- ${Green_font_prefix}4.${Font_color_suffix}  修改 NAT 配置
- ${Green_font_prefix}5.${Font_color_suffix}  修改 全部配置
+ ${Green_font_prefix}1.${Font_color_suffix}  Modify proxy port
+ ${Green_font_prefix}2.${Font_color_suffix}  Modify proxy password
+ ${Green_font_prefix}3.${Font_color_suffix}  Modify proxy TAG
+ ${Green_font_prefix}4.${Font_color_suffix}  Modify NAT configuration
+ ${Green_font_prefix}5.${Font_color_suffix}  Modify whole configuration
 ————————————————
- ${Green_font_prefix}6.${Font_color_suffix}  更新 Telegram IP段(无需频繁更新)
- ${Green_font_prefix}7.${Font_color_suffix}  更新 Telegram 密匙(一般不用管)
+ ${Green_font_prefix}6.${Font_color_suffix}  Update Telegram IP base (no need to update frequently)
+ ${Green_font_prefix}7.${Font_color_suffix}  Update the Telegram key (usually not required)
 ————————————————
- ${Green_font_prefix}8.${Font_color_suffix}  定时 更新 Telegram IP段
- ${Green_font_prefix}9.${Font_color_suffix}  监控 运行状态" && echo
+ ${Green_font_prefix}8.${Font_color_suffix}  Scheduled update of Telegram IP base
+ ${Green_font_prefix}9.${Font_color_suffix}  Proxy operating status monitor" && echo
 	read -e -p "(默认: 取消):" mtp_modify
 	[[ -z "${mtp_modify}" ]] && echo "已取消..." && exit 1
 	if [[ "${mtp_modify}" == "1" ]]; then
