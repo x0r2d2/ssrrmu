@@ -5,7 +5,7 @@ export PATH
 #=================================================
 #	System Required: CentOS 6+/Debian 6+/Ubuntu 14.04+
 #	Description: Install the ShadowsocksR mudbjson server
-#	Version: 1.0.25
+#	Version: 1.0.26
 #	Author: Toyo
 #       Translator: hybtoy 
 #	Blog: https://doub.io/ss-jc60/
@@ -316,7 +316,7 @@ View_User(){
 	while true
 	do
 		echo -e "Please enter the user port to view the account information"
-		stty erase '^H' && read -p "(Default: cancel):" View_user_port
+		read -e -p "(Default: cancel):" View_user_port
 		[[ -z "${View_user_port}" ]] && echo -e "已取消..." && exit 1
 		View_user=$(cat "${config_user_mudb_file}"|grep '"port": '"${View_user_port}"',')
 		if [[ ! -z ${View_user} ]]; then
@@ -357,7 +357,7 @@ View_User_info(){
 # 设置 配置信息
 Set_config_user(){
 	echo "Please enter the username you want to set (do not repeat, does not support Chinese, will be reported incorrect!)"
-	stty erase '^H' && read -p "(Default: doubi):" ssr_user
+	read -e -p "(Default: doubi):" ssr_user
 	[[ -z "${ssr_user}" ]] && ssr_user="doubi"
 	echo && echo ${Separator_1} && echo -e "	username : ${Green_font_prefix}${ssr_user}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
@@ -365,7 +365,7 @@ Set_config_port(){
 	while true
 	do
 	echo -e "Please enter the user port to be set"
-	stty erase '^H' && read -p "(Default: 2333):" ssr_port
+	read -e -p "(Default: 2333):" ssr_port
 	[[ -z "$ssr_port" ]] && ssr_port="2333"
 	expr ${ssr_port} + 0 &>/dev/null
 	if [[ $? == 0 ]]; then
@@ -382,7 +382,7 @@ Set_config_port(){
 }
 Set_config_password(){
 	echo "Please enter the user password you want to set"
-	stty erase '^H' && read -p "(Default: doub.io):" ssr_password
+	read -e -p "(Default: doub.io):" ssr_password
 	[[ -z "${ssr_password}" ]] && ssr_password="doub.io"
 	echo && echo ${Separator_1} && echo -e "	Password : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
@@ -412,7 +412,7 @@ Set_config_method(){
  ${Red_font_prefix}17.${Font_color_suffix} xsalsa20
  ${Red_font_prefix}18.${Font_color_suffix} xchacha20
  ${Tip} For salsa20/chacha20-*, please install libsodium" && echo
-	stty erase '^H' && read -p "(Default: 5. aes-128-ctr):" ssr_method
+	read -e -p "(Default: 5. aes-128-ctr):" ssr_method
 	[[ -z "${ssr_method}" ]] && ssr_method="5"
 	if [[ ${ssr_method} == "1" ]]; then
 		ssr_method="none"
@@ -471,7 +471,7 @@ Set_config_protocol(){
  ${Red_font_prefix}11.${Font_color_suffix} auth_akarin_rand
  ${Red_font_prefix}12.${Font_color_suffix} auth_akarin_spec_a
  ${Tip} If you select auth_chain_* series protocol, it is recommended to set encryption method to none" && echo
-	stty erase '^H' && read -p "(Default: 5. auth_chain_a):" ssr_protocol
+	read -e -p "(Default: 5. auth_chain_a):" ssr_protocol
 	[[ -z "${ssr_protocol}" ]] && ssr_protocol="2"
 	if [[ ${ssr_protocol} == "1" ]]; then
 		ssr_protocol="origin"
@@ -503,7 +503,7 @@ Set_config_protocol(){
 	echo && echo ${Separator_1} && echo -e "	Protocol : ${Green_font_prefix}${ssr_protocol}${Font_color_suffix}" && echo ${Separator_1} && echo
 	if [[ ${ssr_protocol} != "origin" ]]; then
 		if [[ ${ssr_protocol} == "auth_sha1_v4" ]]; then
-			stty erase '^H' && read -p "Set protocol plug-in to compatible mode(_compatible)?[Y/n]" ssr_protocol_yn
+			read -e -p "Set protocol plug-in to compatible mode(_compatible)?[Y/n]" ssr_protocol_yn
 			[[ -z "${ssr_protocol_yn}" ]] && ssr_protocol_yn="y"
 			[[ $ssr_protocol_yn == [Yy] ]] && ssr_protocol=${ssr_protocol}"_compatible"
 			echo
@@ -518,7 +518,7 @@ Set_config_obfs(){
  ${Green_font_prefix}4.${Font_color_suffix} random_head
  ${Green_font_prefix}5.${Font_color_suffix} tls1.2_ticket_auth
   If you choose tls1.2_ticket_auth，then the client can choose tls1.2_ticket_fastauth !" && echo
-	stty erase '^H' && read -p "(Default: 5. tls1.2_ticket_auth):" ssr_obfs
+	read -e -p "(Default: 5. tls1.2_ticket_auth):" ssr_obfs
 	[[ -z "${ssr_obfs}" ]] && ssr_obfs="5"
 	if [[ ${ssr_obfs} == "1" ]]; then
 		ssr_obfs="plain"
@@ -535,7 +535,7 @@ Set_config_obfs(){
 	fi
 	echo && echo ${Separator_1} && echo -e "	obfs : ${Green_font_prefix}${ssr_obfs}${Font_color_suffix}" && echo ${Separator_1} && echo
 	if [[ ${ssr_obfs} != "plain" ]]; then
-			stty erase '^H' && read -p "Set protocol plug-in to compatible mode(_compatible)?[Y/n]" ssr_obfs_yn
+			read -e -p "Set protocol plug-in to compatible mode(_compatible)?[Y/n]" ssr_obfs_yn
 			[[ -z "${ssr_obfs_yn}" ]] && ssr_obfs_yn="y"
 			[[ $ssr_obfs_yn == [Yy] ]] && ssr_obfs=${ssr_obfs}"_compatible"
 			echo
@@ -546,7 +546,7 @@ Set_config_protocol_param(){
 	do
 	echo -e "Please enter the number of devices you want to set to limit (${Green_font_prefix} auth_* 系列协议 不兼容原版才有效 ${Font_color_suffix})"
 	echo -e "${Tip} Number of devices limit: the number of clients that can be linked at the same time per port (multi-port mode, each port is calculated independently), the minimum recommended 2."
-	stty erase '^H' && read -p "(Default: unlimited):" ssr_protocol_param
+	read -e -p "(Default: unlimited):" ssr_protocol_param
 	[[ -z "$ssr_protocol_param" ]] && ssr_protocol_param="" && echo && break
 	expr ${ssr_protocol_param} + 0 &>/dev/null
 	if [[ $? == 0 ]]; then
@@ -565,7 +565,7 @@ Set_config_speed_limit_per_con(){
 	while true
 	do
 	echo -e "Please enter the user's single-thread limit to be set(in KB/S)"
-	stty erase '^H' && read -p "(Default: unlimited):" ssr_speed_limit_per_con
+	read -e -p "(Default: unlimited):" ssr_speed_limit_per_con
 	[[ -z "$ssr_speed_limit_per_con" ]] && ssr_speed_limit_per_con=0 && echo && break
 	expr ${ssr_speed_limit_per_con} + 0 &>/dev/null
 	if [[ $? == 0 ]]; then
@@ -586,7 +586,7 @@ Set_config_speed_limit_per_user(){
 	echo
 	echo -e "Please enter the maximum user speed limit you want to set(in KB/S)"
 	echo -e "${Tip} Total port speed limit: the overall speed limit of a single port."
-	stty erase '^H' && read -p "(Default: unlimited):" ssr_speed_limit_per_user
+	read -e -p "(Default: unlimited):" ssr_speed_limit_per_user
 	[[ -z "$ssr_speed_limit_per_user" ]] && ssr_speed_limit_per_user=0 && echo && break
 	expr ${ssr_speed_limit_per_user} + 0 &>/dev/null
 	if [[ $? == 0 ]]; then
@@ -606,7 +606,7 @@ Set_config_transfer(){
 	do
 	echo
 	echo -e "Please enter the total amount of traffic available for the user to set(in GB, 1-838868 GB)"
-	stty erase '^H' && read -p "(Default: unlimited):" ssr_transfer
+	read -e -p "(Default: unlimited):" ssr_transfer
 	[[ -z "$ssr_transfer" ]] && ssr_transfer="838868" && echo && break
 	expr ${ssr_transfer} + 0 &>/dev/null
 	if [[ $? == 0 ]]; then
@@ -624,7 +624,7 @@ Set_config_transfer(){
 Set_config_forbid(){
 	echo "Forbidden port"
 	echo -e "${Tip} Forbidden Ports: For example, if you do not allow access to port 25, users will not be able to access mail port 25 via the SSR proxy. If 80,443 is disabled then users will not be able to access http / https sites normally."
-	stty erase '^H' && read -p "(Default: allow all):" ssr_forbid
+	read -e -p "(Default: allow all):" ssr_forbid
 	[[ -z "${ssr_forbid}" ]] && ssr_forbid=""
 	echo && echo ${Separator_1} && echo -e "	Forbidden Port : ${Green_font_prefix}${ssr_forbid}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
@@ -649,7 +649,7 @@ Set_config_enable(){
 	done
 	if [[ "${enable}" == "1" ]]; then
 		echo -e "Port [${ssr_port}] The account status is：${Green_font_prefix}Enabled ${Font_color_suffix} , switch to ${Red_font_prefix}Disabled${Font_color_suffix} ?[Y/n]"
-		stty erase '^H' && read -p "(Default: Y):" ssr_enable_yn
+		read -e -p "(Default: Y):" ssr_enable_yn
 		[[ -z "${ssr_enable_yn}" ]] && ssr_enable_yn="y"
 		if [[ "${ssr_enable_yn}" == [Yy] ]]; then
 			ssr_enable="0"
@@ -658,7 +658,7 @@ Set_config_enable(){
 		fi
 	elif [[ "${enable}" == "0" ]]; then
 		echo -e "Port [${ssr_port}] The account status is：${Green_font_prefix}Disabled ${Font_color_suffix} , switch to ${Red_font_prefix}Disabled${Font_color_suffix} ?[Y/n]"
-		stty erase '^H' && read -p "(Default: Y):" ssr_enable_yn
+		read -e -p "(Default: Y):" ssr_enable_yn
 		[[ -z "${ssr_enable_yn}" ]] && ssr_enable_yn = "y"
 		if [[ "${ssr_enable_yn}" == [Yy] ]]; then
 			ssr_enable="1"
@@ -680,13 +680,13 @@ Set_user_api_server_pub_addr(){
 		fi
 	fi
 	echo "Please enter the server IP or domain name to be displayed in the user's configuration (when the server has multiple IPs, you can specify the IP or domain name displayed in the user's configuration)"
-	stty erase '^H' && read -p "(Default: Automatic detection of external network IP):" ssr_server_pub_addr
+	read -e -p "(Default: Automatic detection of external network IP):" ssr_server_pub_addr
 	if [[ -z "${ssr_server_pub_addr}" ]]; then
 		Get_IP
 		if [[ ${ip} == "VPS_IP" ]]; then
 			while true
 			do
-			stty erase '^H' && read -p "${Error} Automatic detection of external network IP failed, please manually enter the server IP or domain name" ssr_server_pub_addr
+			read -e -p "${Error} Automatic detection of external network IP failed, please manually enter the server IP or domain name" ssr_server_pub_addr
 			if [[ -z "$ssr_server_pub_addr" ]]; then
 				echo -e "${Error} 不能为空！"
 			else
@@ -957,7 +957,7 @@ Update_SSR(){
 Uninstall_SSR(){
 	[[ ! -e ${ssr_folder} ]] && echo -e "${Error} 没有安装 ShadowsocksR，请检查 !" && exit 1
 	echo "确定要 卸载ShadowsocksR？[y/N]" && echo
-	stty erase '^H' && read -p "(Default: n):" unyn
+	read -e -p "(Default: n):" unyn
 	[[ -z ${unyn} ]] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
 		check_pid
@@ -991,7 +991,7 @@ Check_Libsodium_ver(){
 Install_Libsodium(){
 	if [[ -e ${Libsodiumr_file} ]]; then
 		echo -e "${Error} libsodium already installed, do you want to update?[y/N]"
-		stty erase '^H' && read -p "(Default: n):" yn
+		read -e -p "(Default: n):" yn
 		[[ -z ${yn} ]] && yn="n"
 		if [[ ${yn} == [Nn] ]]; then
 			echo "Cancelled..." && exit 1
@@ -1087,7 +1087,7 @@ View_user_connection_info(){
 	echo && echo -e "Please select the format to display：
  ${Green_font_prefix}1.${Font_color_suffix} display IP 
  ${Green_font_prefix}2.${Font_color_suffix} display IP+Resolve the DNS name " && echo
-	stty erase '^H' && read -p "(Default: 1):" ssr_connection_info
+	read -e -p "(Default: 1):" ssr_connection_info
 	[[ -z "${ssr_connection_info}" ]] && ssr_connection_info="1"
 	if [[ ${ssr_connection_info} == "1" ]]; then
 		View_user_connection_info_1 ""
@@ -1133,7 +1133,7 @@ Modify_port(){
 	while true
 	do
 		echo -e "Please enter the user (Port)that has to be modified" 
-		stty erase '^H' && read -p "(Default: cancel):" ssr_port
+		read -e -p "(Default: cancel):" ssr_port
 		[[ -z "${ssr_port}" ]] && echo -e "已取消..." && exit 1
 		Modify_user=$(cat "${config_user_mudb_file}"|grep '"port": '"${ssr_port}"',')
 		if [[ ! -z ${Modify_user} ]]; then
@@ -1163,7 +1163,7 @@ Modify_Config(){
  ${Green_font_prefix}13.${Font_color_suffix} Modify the IP or domain name displayed in the user's profile
  
  ${Tip} User's user name and port can not be modified, if you need to modify, please use the script to manually modify the function !" && echo
-	stty erase '^H' && read -p "(Default: cancel):" ssr_modify
+	read -e -p "(Default: cancel):" ssr_modify
 	[[ -z "${ssr_modify}" ]] && echo "已取消..." && exit 1
 	if [[ ${ssr_modify} == "1" ]]; then
 		Add_port_user
@@ -1252,7 +1252,7 @@ Add_port_user(){
 				Save_iptables
 				echo -e "${Info} User added successfully ${Green_font_prefix}[username: ${ssr_user} , port: ${ssr_port}]${Font_color_suffix} "
 				echo
-				stty erase '^H' && read -p "Continue to add user configuration?[Y/n]:" addyn
+				read -e -p "Continue to add user configuration?[Y/n]:" addyn
 				[[ -z ${addyn} ]] && addyn="y"
 				if [[ ${addyn} == [Nn] ]]; then
 					Get_User_info "${ssr_port}"
@@ -1270,7 +1270,7 @@ Del_port_user(){
 	while true
 	do
 		echo -e "请输入要删除的用户 Port"
-		stty erase '^H' && read -p "(Default: 取消):" del_user_port
+		read -e -p "(Default: 取消):" del_user_port
 		[[ -z "${del_user_port}" ]] && echo -e "已取消..." && exit 1
 		del_user=$(cat "${config_user_mudb_file}"|grep '"port": '"${del_user_port}"',')
 		if [[ ! -z ${del_user} ]]; then
@@ -1293,7 +1293,7 @@ Manually_Modify_Config(){
 	SSR_installation_status
 	nano ${config_user_mudb_file}
 	echo "是否现在重启ShadowsocksR？[Y/n]" && echo
-	stty erase '^H' && read -p "(Default: y):" yn
+	read -e -p "(Default: y):" yn
 	[[ -z ${yn} ]] && yn="y"
 	if [[ ${yn} == [Yy] ]]; then
 		Restart_SSR
@@ -1307,13 +1307,13 @@ Clear_transfer(){
  ${Green_font_prefix}3.${Font_color_suffix}  All user traffic is cleared on startup
  ${Green_font_prefix}4.${Font_color_suffix}  Stop timing all user traffic
  ${Green_font_prefix}5.${Font_color_suffix}  Modify the timing of all user traffic" && echo
-	stty erase '^H' && read -p "(Default: 取消):" ssr_modify
+	read -e -p "(Default: 取消):" ssr_modify
 	[[ -z "${ssr_modify}" ]] && echo "已取消..." && exit 1
 	if [[ ${ssr_modify} == "1" ]]; then
 		Clear_transfer_one
 	elif [[ ${ssr_modify} == "2" ]]; then
 		echo "Are you sure you want to clear all user traffic[y/N]" && echo
-		stty erase '^H' && read -p "(Default: n):" yn
+		read -e -p "(Default: n):" yn
 		[[ -z ${yn} ]] && yn="n"
 		if [[ ${yn} == [Yy] ]]; then
 			Clear_transfer_all
@@ -1339,7 +1339,7 @@ Clear_transfer_one(){
 	while true
 	do
 		echo -e "请输入要清零已使用流量的用户 Port"
-		stty erase '^H' && read -p "(Default: 取消):" Clear_transfer_user_port
+		read -e -p "(Default: 取消):" Clear_transfer_user_port
 		[[ -z "${Clear_transfer_user_port}" ]] && echo -e "已取消..." && exit 1
 		Clear_transfer_user=$(cat "${config_user_mudb_file}"|grep '"port": '"${Clear_transfer_user_port}"',')
 		if [[ ! -z ${Clear_transfer_user} ]]; then
@@ -1411,7 +1411,7 @@ Set_crontab(){
  ${Green_font_prefix} 0 2 */7 * * ${Font_color_suffix} 代表 每7天2点0分 清零已使用流量
  ${Green_font_prefix} 0 2 * * 0 ${Font_color_suffix} 代表 每个星期日(7) 清零已使用流量
  ${Green_font_prefix} 0 2 * * 3 ${Font_color_suffix} 代表 每个星期三(3) 清零已使用流量" && echo
-	stty erase '^H' && read -p "(Default: 0 2 1 * * 每月1日2点0分):" Crontab_time
+	read -e -p "(Default: 0 2 1 * * 每月1日2点0分):" Crontab_time
 	[[ -z "${Crontab_time}" ]] && Crontab_time="0 2 1 * *"
 }
 Start_SSR(){
@@ -1450,7 +1450,7 @@ Configure_Server_Speeder(){
  ${Green_font_prefix}6.${Font_color_suffix} 查看 锐速 状态
  
  注意： 锐速和LotServer不能同时安装/启动！" && echo
-	stty erase '^H' && read -p "(Default: 取消):" server_speeder_num
+	read -e -p "(Default: 取消):" server_speeder_num
 	[[ -z "${server_speeder_num}" ]] && echo "已取消..." && exit 1
 	if [[ ${server_speeder_num} == "1" ]]; then
 		Install_ServerSpeeder
@@ -1494,7 +1494,7 @@ Install_ServerSpeeder(){
 }
 Uninstall_ServerSpeeder(){
 	echo "确定要卸载 锐速(Server Speeder)？[y/N]" && echo
-	stty erase '^H' && read -p "(Default: n):" unyn
+	read -e -p "(Default: n):" unyn
 	[[ -z ${unyn} ]] && echo && echo "已取消..." && exit 1
 	if [[ ${unyn} == [Yy] ]]; then
 		chattr -i /serverspeeder/etc/apx*
@@ -1514,7 +1514,7 @@ Configure_LotServer(){
  ${Green_font_prefix}6.${Font_color_suffix} 查看 LotServer 状态
  
  注意： 锐速和LotServer不能同时安装/启动！" && echo
-	stty erase '^H' && read -p "(Default: 取消):" lotserver_num
+	read -e -p "(Default: 取消):" lotserver_num
 	[[ -z "${lotserver_num}" ]] && echo "已取消..." && exit 1
 	if [[ ${lotserver_num} == "1" ]]; then
 		Install_LotServer
@@ -1555,7 +1555,7 @@ Install_LotServer(){
 }
 Uninstall_LotServer(){
 	echo "确定要卸载 LotServer？[y/N]" && echo
-	stty erase '^H' && read -p "(Default: n):" unyn
+	read -e -p "(Default: n):" unyn
 	[[ -z ${unyn} ]] && echo && echo "已取消..." && exit 1
 	if [[ ${unyn} == [Yy] ]]; then
 		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
@@ -1575,7 +1575,7 @@ echo -e "${Green_font_prefix} [安装前 请注意] ${Font_color_suffix}
 1. 安装开启BBR，需要更换内核，存在更换失败等风险(重启后无法开机)
 2. 本脚本仅支持 Debian / Ubuntu 系统更换内核，OpenVZ和Docker 不支持更换内核
 3. Debian 更换内核过程中会提示 [ 是否终止卸载内核 ] ，请选择 ${Green_font_prefix} NO ${Font_color_suffix}" && echo
-	stty erase '^H' && read -p "(Default: 取消):" bbr_num
+	read -e -p "(Default: 取消):" bbr_num
 	[[ -z "${bbr_num}" ]] && echo "已取消..." && exit 1
 	if [[ ${bbr_num} == "1" ]]; then
 		Install_BBR
@@ -1623,7 +1623,7 @@ Other_functions(){
   —— Low or verbose mode.
   ${Green_font_prefix}7.${Font_color_suffix} Monitor ShadowsocksR server running status
   —— NOTE: This function is suitable for the SSR server to end regular processes. Once this function is enabled, it will be detected every minute. When the process does not exist, the SSR server starts automatically." && echo
-	stty erase '^H' && read -p "(Default: cancel):" other_num
+	read -e -p "(Default: cancel):" other_num
 	[[ -z "${other_num}" ]] && echo "已取消..." && exit 1
 	if [[ ${other_num} == "1" ]]; then
 		Configure_BBR
@@ -1660,7 +1660,7 @@ Set_config_connect_verbose_info(){
 	if [[ ${connect_verbose_info} = "0" ]]; then
 		echo && echo -e "当前日志模式: ${Green_font_prefix}简单模式（只输出错误日志）${Font_color_suffix}" && echo
 		echo -e "确定要切换为 ${Green_font_prefix}详细模式（输出详细连接日志+错误日志）${Font_color_suffix}？[y/N]"
-		stty erase '^H' && read -p "(Default: n):" connect_verbose_info_ny
+		read -e -p "(Default: n):" connect_verbose_info_ny
 		[[ -z "${connect_verbose_info_ny}" ]] && connect_verbose_info_ny="n"
 		if [[ ${connect_verbose_info_ny} == [Yy] ]]; then
 			ssr_connect_verbose_info="1"
@@ -1672,7 +1672,7 @@ Set_config_connect_verbose_info(){
 	else
 		echo && echo -e "当前日志模式: ${Green_font_prefix}详细模式（输出详细连接日志+错误日志）${Font_color_suffix}" && echo
 		echo -e "确定要切换为 ${Green_font_prefix}简单模式（只输出错误日志）${Font_color_suffix}？[y/N]"
-		stty erase '^H' && read -p "(Default: n):" connect_verbose_info_ny
+		read -e -p "(Default: n):" connect_verbose_info_ny
 		[[ -z "${connect_verbose_info_ny}" ]] && connect_verbose_info_ny="n"
 		if [[ ${connect_verbose_info_ny} == [Yy] ]]; then
 			ssr_connect_verbose_info="0"
@@ -1689,7 +1689,7 @@ Set_crontab_monitor_ssr(){
 	if [[ -z "${crontab_monitor_ssr_status}" ]]; then
 		echo && echo -e "Current monitoring mode: ${Green_font_prefix}Not monitored${Font_color_suffix}" && echo
 		echo -e "确定要开启为 ${Green_font_prefix}ShadowsocksR服务端运行状态监控${Font_color_suffix} 功能吗？(当进程关闭则自动启动SSR服务端)[Y/n]"
-		stty erase '^H' && read -p "(Default: y):" crontab_monitor_ssr_status_ny
+		read -e -p "(Default: y):" crontab_monitor_ssr_status_ny
 		[[ -z "${crontab_monitor_ssr_status_ny}" ]] && crontab_monitor_ssr_status_ny="y"
 		if [[ ${crontab_monitor_ssr_status_ny} == [Yy] ]]; then
 			crontab_monitor_ssr_cron_start
@@ -1699,7 +1699,7 @@ Set_crontab_monitor_ssr(){
 	else
 		echo && echo -e "当前监控模式: ${Green_font_prefix}已开启${Font_color_suffix}" && echo
 		echo -e "确定要关闭为 ${Green_font_prefix}ShadowsocksR服务端运行状态监控${Font_color_suffix} 功能吗？(当进程关闭则自动启动SSR服务端)[y/N]"
-		stty erase '^H' && read -p "(Default: n):" crontab_monitor_ssr_status_ny
+		read -e -p "(Default: n):" crontab_monitor_ssr_status_ny
 		[[ -z "${crontab_monitor_ssr_status_ny}" ]] && crontab_monitor_ssr_status_ny="n"
 		if [[ ${crontab_monitor_ssr_status_ny} == [Yy] ]]; then
 			crontab_monitor_ssr_cron_stop
@@ -1757,7 +1757,7 @@ Update_Shell(){
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && exit 0
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
-		stty erase '^H' && read -p "(默认: y):" yn
+		read -e -p "(默认: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
 			cd "${file}"
@@ -1818,7 +1818,7 @@ else
  ${Green_font_prefix}15.${Font_color_suffix} Upgrade script 
  "
 	menu_status
-	echo && stty erase '^H' && read -p "Please enter the number [1-15]：" num
+	echo && read -e -p "Please enter the number [1-15]：" num
 case "$num" in
 	1)
 	Install_SSR
