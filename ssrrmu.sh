@@ -34,7 +34,7 @@ Tip="${Green_font_prefix}[note]${Font_color_suffix}"
 Separator_1="——————————————————————————————"
 
 check_root(){
-	[[ $EUID != 0 ]] && echo -e "${Error} 当前账号非ROOT(或没有ROOT权限)，无法继续操作，请使用${Green_background_prefix} sudo su ${Font_color_suffix}来获取临时ROOT权限（执行后会提示输入当前账号的密码）。" && exit 1
+	[[ $EUID != 0 ]] && echo -e "${Error} Script has benn run as non-root user${Green_background_prefix} sudo su ${Font_color_suffix}Trying to obtain root permission, please input the password
 }
 check_sys(){
 	if [[ -f /etc/redhat-release ]]; then
@@ -73,7 +73,7 @@ BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
 		echo -e "${Error} 没有发现 BBR脚本，开始下载..."
 		cd "${file}"
-		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/bbr.sh; then
+		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/master/bbr.sh; then
 			echo -e "${Error} BBR 脚本下载失败 !" && exit 1
 		else
 			echo -e "${Info} BBR 脚本下载完成 !"
