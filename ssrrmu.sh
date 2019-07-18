@@ -64,7 +64,7 @@ SSR_installation_status(){
 	[[ ! -e ${ssr_folder} ]] && echo -e "${Error} ShadowsocksR folder not found，please check!" && exit 1
 }
 Server_Speeder_installation_status(){
-	[[ ! -e ${Server_Speeder_file} ]] && echo -e "${Error} 没有安装 锐速(Server Speeder)，请检查 !" && exit 1
+	[[ ! -e ${Server_Speeder_file} ]] && echo -e "${Error} Server speeder is not installed!" && exit 1
 }
 LotServer_installation_status(){
 	[[ ! -e ${LotServer_file} ]] && echo -e "${Error} 没有安装 LotServer，请检查 !" && exit 1
