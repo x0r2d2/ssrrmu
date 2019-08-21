@@ -1018,8 +1018,8 @@ Install_Libsodium(){
 	fi
 	ldconfig
 	cd .. && rm -rf libsodium-${Libsodiumr_ver}.tar.gz && rm -rf libsodium-${Libsodiumr_ver}
-	[[ ! -e ${Libsodiumr_file} ]] && echo -e "${Error} libsodium 安装失败 !" && exit 1
-	echo && echo -e "${Info} libsodium 安装成功 !" && echo
+	[[ ! -e ${Libsodiumr_file} ]] && echo -e "${Error} Libsodium installation failed !" && exit 1
+	echo && echo -e "${Info} Libsodium installed successfully !" && echo
 }
 # 显示 连接信息
 debian_View_user_connection_info(){
