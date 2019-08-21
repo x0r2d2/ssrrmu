@@ -73,7 +73,7 @@ BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
 		echo -e "${Error} 没有发现 BBR脚本，开始下载..."
 		cd "${file}"
-		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/bbr.sh; then
+		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/master/bbr.sh; then
 			echo -e "${Error} BBR 脚本下载失败 !" && exit 1
 		else
 			echo -e "${Info} BBR 脚本下载完成 !"
