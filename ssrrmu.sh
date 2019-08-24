@@ -470,7 +470,7 @@ Set_config_protocol(){
  ${Red_font_prefix}10.${Font_color_suffix} auth_chain_f
  ${Tip} If you select auth_chain_* series protocol, it is recommended to set encryption method to none" && echo
 	read -e -p "(Default: 5. auth_chain_a):" ssr_protocol
-	[[ -z "${ssr_protocol}" ]] && ssr_protocol="2"
+	[[ -z "${ssr_protocol}" ]] && ssr_protocol="5"
 	if [[ ${ssr_protocol} == "1" ]]; then
 		ssr_protocol="origin"
 	elif [[ ${ssr_protocol} == "2" ]]; then
