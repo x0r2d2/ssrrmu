@@ -86,12 +86,12 @@ Add_iptables(){
 	if [[ ! -z "${ssr_port}" ]]; then
 		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport ${ssr_port} -j ACCEPT
 		iptables -I INPUT -m state --state NEW -m udp -p udp --dport ${ssr_port} -j ACCEPT
-		iptables -I INPUT -p tcp --syn -dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
-		iptables -I INPUT -p udp --syn -dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
+		iptables -I INPUT -p tcp --dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
+		iptables -I INPUT -p udp --dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
 		ip6tables -I INPUT -m state --state NEW -m tcp -p tcp --dport ${ssr_port} -j ACCEPT
 		ip6tables -I INPUT -m state --state NEW -m udp -p udp --dport ${ssr_port} -j ACCEPT
-		ip6tables -I INPUT -p tcp --syn -dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
-		ip6tables -I INPUT -p udp --syn -dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
+		ip6tables -I INPUT -p tcp --dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
+		ip6tables -I INPUT -p udp --dport ${ssr_port} -m iplimit --iplimit-above 1 -J REJECT
 		
 	fi
 }
@@ -99,12 +99,12 @@ Del_iptables(){
 	if [[ ! -z "${port}" ]]; then
 		iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${port} -j ACCEPT
 		iptables -D INPUT -m state --state NEW -m udp -p udp --dport ${port} -j ACCEPT
-		iptables -D INPUT -p tcp --syn -dport ${port} -m iplimit --iplimit-above 1 -J REJECT
-		iptables -D INPUT -p udp --syn -dport ${port} -m iplimit --iplimit-above 1 -J REJECT
+		iptables -D INPUT -p tcp --dport ${port} -m iplimit --iplimit-above 1 -J REJECT
+		iptables -D INPUT -p udp --dport ${port} -m iplimit --iplimit-above 1 -J REJECT
 		ip6tables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${port} -j ACCEPT
 		ip6tables -D INPUT -m state --state NEW -m udp -p udp --dport ${port} -j ACCEPT
-		ip6tables -D INPUT -p tcp --syn -dport ${port} -m iplimit --iplimit-above 1 -J REJECT
-		ip6tables -D INPUT -p udp --syn -dport ${port} -m iplimit --iplimit-above 1 -J REJECT
+		ip6tables -D INPUT -p tcp --dport ${port} -m iplimit --iplimit-above 1 -J REJECT
+		ip6tables -D INPUT -p udp --dport ${port} -m iplimit --iplimit-above 1 -J REJECT
 	fi
 }
 Save_iptables(){
