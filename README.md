@@ -1,5 +1,5 @@
 # ssrrmu
-ShadowsocksRR multi-user (mudbjson) install script. For single user mode, chech single-user branch.
+ShadowsocksRR multi-user (mudbjson) install script. For single user mode, check single-user branch.
 
 Original version - https://doub.io/ss-jc60/ (Chinese)
 
