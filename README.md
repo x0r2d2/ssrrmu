@@ -1,12 +1,12 @@
-# ssrrmu
-ShadowsocksRR multi-user (mudbjson) install script
+# ssr single-user
+ShadowsocksR single-user install script
 
-Original version - https://doub.io/ss-jc60/ (Chinese)
+Author: teddysun
 
 PRs are welcome!
 
 ```bash
-sudo wget https://raw.githubusercontent.com/hybtoy/ssrrmu/master/ssrrmu.sh && chmod +x ssrrmu.sh && bash ssrrmu.sh
+sudo wget https://raw.githubusercontent.com/hybtoy/ssrrmu/single-user/ssr.sh && chmod +x ssr.sh && bash ssr.sh
 ```
 Please note that "dev" branch is not stable, do not use it in production environment. 
 
