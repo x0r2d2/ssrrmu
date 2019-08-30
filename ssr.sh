@@ -394,6 +394,7 @@ EOF
 urlsafe_base64(){
 	date=$(echo -n "$1"|base64|sed ':a;N;s/\n/ /g;ta'|sed 's/ //g;s/=//g;s/+/-/g;s/\//_/g')
 	echo -e "${date}"
+}
 
 ssr_link(){
 	SSRprotocol=$(echo ${shadowsockprotocol} | sed 's/_compatible//g')
@@ -402,6 +403,7 @@ ssr_link(){
 	SSRbase64=$(urlsafe_base64 "$(get_ip):${shadowsocksport}:${shadowsockprotocol}:${shadowsockscipher}:${shadowsockobfs}:${SSRPWDbase64}")
 	SSRurl="ssr://${SSRbase64}"
 	ssr_link=" SSR Link : ${Red_font_prefix}${SSRurl}${Font_color_suffix} \n"
+}
 
 # Install ShadowsocksR
 install(){
