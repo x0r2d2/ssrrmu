@@ -391,20 +391,6 @@ config_shadowsocks(){
 EOF
 }
 
-urlsafe_base64(){
-	date=$(echo -n "$1"|base64|sed ':a;N;s/\n/ /g;ta'|sed 's/ //g;s/=//g;s/+/-/g;s/\//_/g')
-	echo -e "${date}"
-}
-
-ssr_link(){
-	SSRprotocol=$(echo ${shadowsockprotocol} | sed 's/_compatible//g')
-	SSRobfs=$(echo ${shadowsockobfs} | sed 's/_compatible//g')
-	SSRPWDbase64=$(urlsafe_base64 "${shadowsockspwd}")
-	SSRbase64=$(urlsafe_base64 "$(get_ip):${shadowsocksport}:${shadowsockprotocol}:${shadowsockscipher}:${shadowsockobfs}:${SSRPWDbase64}")
-	SSRurl="ssr://${SSRbase64}"
-	ssr_link=" SSR Link : ${Red_font_prefix}${SSRurl}${Font_color_suffix} \n"
-}
-
 # Install ShadowsocksR
 install(){
     # Install libsodium
@@ -440,14 +426,12 @@ install(){
         echo -e "Congratulations, ShadowsocksR server install completed!"
         echo -e "Your Server IP        : \033[41;37m $(get_ip) \033[0m"
         echo -e "Your Server Port      : \033[41;37m ${shadowsocksport} \033[0m"
+	echo -e "Your Encryption Method: \033[41;37m ${shadowsockscipher} \033[0m"
         echo -e "Your Password         : \033[41;37m ${shadowsockspwd} \033[0m"
         echo -e "Your Protocol         : \033[41;37m ${shadowsockprotocol} \033[0m"
         echo -e "Your obfs             : \033[41;37m ${shadowsockobfs} \033[0m"
-        echo -e "Your Encryption Method: \033[41;37m ${shadowsockscipher} \033[0m"
-        echo -e "Your SSR Link         : \033[41;37m ${ssr_link} \033[0m"
-        
+                       
         echo
-        echo "Welcome to visit:https://shadowsocks.be/9.html"
         echo "Enjoy it!"
         echo
     else
