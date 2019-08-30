@@ -13,7 +13,7 @@ clear
 echo
 echo "#############################################################"
 echo "# One click Install ShadowsocksR Server                     #"
-echo "# Intro: https://shadowsocks.be/9.html                      #"
+echo "# Intro:                                                    #"
 echo "# Author: Teddysun <i@teddysun.com>                         #"
 echo "# Github: https://github.com/shadowsocksr/shadowsocksr      #"
 echo "#############################################################"
@@ -30,20 +30,14 @@ cur_dir=`pwd`
 ciphers=(
 none
 aes-256-cfb
-aes-192-cfb
 aes-128-cfb
-aes-256-cfb8
-aes-192-cfb8
-aes-128-cfb8
 aes-256-ctr
-aes-192-ctr
 aes-128-ctr
 chacha20-ietf
 chacha20
 salsa20
 xchacha20
 xsalsa20
-rc4-md5
 )
 # Reference URL:
 # https://github.com/shadowsocksr-rm/shadowsocks-rss/blob/master/ssr.md
@@ -51,9 +45,6 @@ rc4-md5
 # Protocol
 protocols=(
 origin
-verify_deflate
-auth_sha1_v4
-auth_sha1_v4_compatible
 auth_aes128_md5
 auth_aes128_sha1
 auth_chain_a
@@ -68,8 +59,6 @@ obfs=(
 plain
 http_simple
 http_simple_compatible
-http_post
-http_post_compatible
 tls1.2_ticket_auth
 tls1.2_ticket_auth_compatible
 tls1.2_ticket_fastauth
@@ -205,7 +194,7 @@ pre_install(){
     # Set ShadowsocksR config port
     while true
     do
-    dport=$(shuf -i 9000-19999 -n 1)
+    dport=$(shuf -i 30000-65000 -n 1)
     echo -e "Please enter a port for ShadowsocksR [1-65535]"
     read -p "(Default port: ${dport}):" shadowsocksport
     [ -z "${shadowsocksport}" ] && shadowsocksport=${dport}
