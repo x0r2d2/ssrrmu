@@ -8,11 +8,20 @@ PRs are welcome!
 ```bash
 sudo wget https://raw.githubusercontent.com/hybtoy/ssrrmu/single-user/ssr.sh && chmod +x ssr.sh && bash ssr.sh
 ```
-Please note that "dev" branch is not stable, do not use it in production environment. 
+Recommended config:
+
+```
+Port - 30000-65000
+Encryption - none
+Protocol - auth_chain_a/b
+Obfs - tls1.2_ticket_auth/fastauth
+```
 
 Client download: 
 
 Windows - https://github.com/shadowsocksrr/shadowsocksr-csharp/releases
+
+MacOS - https://github.com/qinyuhang/ShadowsocksX-NG-R/releases/
 
 Android - https://github.com/shadowsocksrr/shadowsocksr-android/releases
 
