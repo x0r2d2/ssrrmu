@@ -6,7 +6,7 @@ Author: teddysun
 PRs are welcome!
 
 ```bash
-sudo wget https://raw.githubusercontent.com/hybtoy/ssrrmu/single-user/ssr.sh && chmod +x ssr.sh && bash ssr.sh
+sudo wget https://raw.githubusercontent.com/R2D2me/ssrrmu/single-user/ssr.sh && chmod +x ssr.sh && bash ssr.sh
 ```
 Recommended config:
 
